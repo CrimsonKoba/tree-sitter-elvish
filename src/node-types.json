@@ -74,9 +74,13 @@
       }
     },
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "catch_keyword",
+          "named": true
+        },
         {
           "type": "chunk",
           "named": true
@@ -367,11 +371,15 @@
       }
     },
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
         {
           "type": "chunk",
+          "named": true
+        },
+        {
+          "type": "elif_keyword",
           "named": true
         }
       ]
@@ -382,11 +390,15 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
         {
           "type": "chunk",
+          "named": true
+        },
+        {
+          "type": "else_keyword",
           "named": true
         }
       ]
@@ -412,11 +424,15 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
         {
           "type": "chunk",
+          "named": true
+        },
+        {
+          "type": "finally_keyword",
           "named": true
         }
       ]
@@ -502,6 +518,10 @@
         {
           "type": "else",
           "named": true
+        },
+        {
+          "type": "for_keyword",
+          "named": true
         }
       ]
     }
@@ -514,6 +534,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "fn_keyword",
+          "named": true
+        },
         {
           "type": "identifier",
           "named": true
@@ -599,6 +623,10 @@
         {
           "type": "else",
           "named": true
+        },
+        {
+          "type": "if_keyword",
+          "named": true
         }
       ]
     }
@@ -617,6 +645,10 @@
         },
         {
           "type": "string",
+          "named": true
+        },
+        {
+          "type": "use_keyword",
           "named": true
         }
       ]
@@ -1167,6 +1199,10 @@
         {
           "type": "rhs",
           "named": true
+        },
+        {
+          "type": "tmp_keyword",
+          "named": true
         }
       ]
     }
@@ -1193,6 +1229,10 @@
         },
         {
           "type": "finally",
+          "named": true
+        },
+        {
+          "type": "try_keyword",
           "named": true
         }
       ]
@@ -1228,6 +1268,10 @@
         {
           "type": "rhs",
           "named": true
+        },
+        {
+          "type": "set_keyword",
+          "named": true
         }
       ]
     }
@@ -1247,6 +1291,10 @@
         {
           "type": "rhs",
           "named": true
+        },
+        {
+          "type": "var_keyword",
+          "named": true
         }
       ]
     }
@@ -1259,6 +1307,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "del_keyword",
+          "named": true
+        },
         {
           "type": "identifier",
           "named": true
@@ -1335,6 +1387,10 @@
         },
         {
           "type": "else",
+          "named": true
+        },
+        {
+          "type": "while_keyword",
           "named": true
         }
       ]
@@ -1488,48 +1544,48 @@
     "named": true
   },
   {
-    "type": "catch",
-    "named": false
+    "type": "catch_keyword",
+    "named": true
   },
   {
     "type": "comment",
     "named": true
   },
   {
-    "type": "del",
-    "named": false
+    "type": "del_keyword",
+    "named": true
   },
   {
-    "type": "elif",
-    "named": false
+    "type": "elif_keyword",
+    "named": true
   },
   {
-    "type": "else",
-    "named": false
+    "type": "else_keyword",
+    "named": true
   },
   {
     "type": "file",
     "named": true
   },
   {
-    "type": "finally",
-    "named": false
+    "type": "finally_keyword",
+    "named": true
   },
   {
-    "type": "fn",
-    "named": false
+    "type": "fn_keyword",
+    "named": true
   },
   {
-    "type": "for",
-    "named": false
+    "type": "for_keyword",
+    "named": true
   },
   {
     "type": "identifier",
     "named": true
   },
   {
-    "type": "if",
-    "named": false
+    "type": "if_keyword",
+    "named": true
   },
   {
     "type": "io_port",
@@ -1540,32 +1596,32 @@
     "named": true
   },
   {
-    "type": "set",
-    "named": false
+    "type": "set_keyword",
+    "named": true
   },
   {
     "type": "string",
     "named": true
   },
   {
-    "type": "tmp",
-    "named": false
+    "type": "tmp_keyword",
+    "named": true
   },
   {
-    "type": "try",
-    "named": false
+    "type": "try_keyword",
+    "named": true
   },
   {
-    "type": "use",
-    "named": false
+    "type": "use_keyword",
+    "named": true
   },
   {
-    "type": "var",
-    "named": false
+    "type": "var_keyword",
+    "named": true
   },
   {
-    "type": "while",
-    "named": false
+    "type": "while_keyword",
+    "named": true
   },
   {
     "type": "{",

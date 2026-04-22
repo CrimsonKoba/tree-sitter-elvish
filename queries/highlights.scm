@@ -3,21 +3,21 @@
 
 (comment) @comment
 
-(if "if" @conditional)
-(if (elif "elif" @conditional))
-(if (else "else" @conditional))
+(if (if_keyword) @conditional)
+(elif (elif_keyword) @conditional)
+(else (else_keyword) @conditional)
 
-(while "while" @repeat)
-(while (else "else" @repeat))
-(for "for" @repeat)
-(for (else "else" @repeat))
+(while (while_keyword) @repeat)
+(else (else_keyword) @repeat)
+(for (for_keyword) @repeat)
+(else (else_keyword) @repeat)
 
-(try "try" @exception)
-(try (catch "catch" @exception))
-(try (else "else" @exception))
-(try (finally "finally" @exception))
+(try (try_keyword) @exception)
+(catch (catch_keyword) @exception)
+(else (else_keyword) @exception)
+(finally (finally_keyword) @exception)
 
-(import "use" @include)
+(import (use_keyword) @include)
 (import (bareword) @string.special)
 
 (wildcard ["*" "**" "?"] @string.special)
@@ -40,26 +40,26 @@
 (io_port) @number
 
 (function_definition
-  "fn" @keyword.function
+  (fn_keyword) @keyword.function
   (identifier) @function)
 
 (parameter_list) @parameter
 (parameter_list "|" @punctuation.bracket)
 
 (variable_declaration
-  "var" @keyword
+  (var_keyword) @keyword
   (lhs (identifier) @variable))
 
 (variable_assignment
-  "set" @keyword
+  (set_keyword) @keyword
   (lhs (identifier) @variable))
 
 (temporary_assignment
-  "tmp" @keyword
+  (tmp_keyword) @keyword
   (lhs (identifier) @variable))
 
 (variable_deletion
-  "del" @keyword
+  (del_keyword) @keyword
   (identifier) @variable)
 
 

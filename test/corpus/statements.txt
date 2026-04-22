@@ -74,10 +74,10 @@ if $false {
 
 ---
 (source_file
-  (if (variable (identifier)) (chunk (command (identifier)))
-    (elif (variable (identifier)) (chunk (command (identifier))))
-    (elif (variable (identifier)) (chunk (command (identifier))))
-    (else (chunk (command (identifier))))))
+  (if (if_keyword) (variable (identifier)) (chunk (command (identifier)))
+    (elif (elif_keyword) (variable (identifier)) (chunk (command (identifier))))
+    (elif (elif_keyword) (variable (identifier)) (chunk (command (identifier))))
+    (else (else_keyword) (chunk (command (identifier))))))
 
 
 ===
@@ -92,8 +92,8 @@ while $true {
 
 ---
 (source_file
-  (while (variable (identifier)) (chunk (command (identifier)))
-    (else (chunk (command (identifier))))))
+  (while (while_keyword) (variable (identifier)) (chunk (command (identifier)))
+    (else (else_keyword) (chunk (command (identifier))))))
 
 
 ===
@@ -108,9 +108,9 @@ for e [a b] {
 
 ---
 (source_file 
-  (for (identifier) (list (bareword) (bareword))
+  (for (for_keyword) (identifier) (list (bareword) (bareword))
     (chunk (command (identifier)))
-    (else (chunk (command (identifier))))))
+    (else (else_keyword) (chunk (command (identifier))))))
 
 
 ===
@@ -129,10 +129,10 @@ try {
 
 ---
 (source_file
-  (try (chunk (command (identifier)))
-    (catch (identifier) (chunk (command (identifier))))
-    (else (chunk (command (identifier))))
-    (finally (chunk (command (identifier))))))
+  (try (try_keyword) (chunk (command (identifier)))
+    (catch (catch_keyword) (identifier) (chunk (command (identifier))))
+    (else (else_keyword) (chunk (command (identifier))))
+    (finally (finally_keyword) (chunk (command (identifier))))))
 
 
 ===
@@ -145,9 +145,9 @@ use a/b/c foo
 
 ---
 (source_file
-  (import (bareword))
-  (import (bareword))
-  (import (bareword) (bareword)))
+  (import (use_keyword) (bareword))
+  (import (use_keyword) (bareword))
+  (import (use_keyword) (bareword) (bareword)))
 
 
 ===
@@ -158,7 +158,7 @@ fn f { nop }
 
 ---
 (source_file
-  (function_definition (identifier)
+  (function_definition (fn_keyword) (identifier)
     (lambda (chunk (command (identifier))))))
 
 
@@ -175,17 +175,19 @@ del x
 
 ---
 (source_file
-  (variable_declaration (lhs (identifier)))
+  (variable_declaration (var_keyword) (lhs (identifier)))
   (variable_declaration
+    (var_keyword)
     (lhs (identifier) (identifier))
     (rhs (bareword) (bareword)))
   (variable_assignment
-    (lhs (identifier)) (rhs (bareword)))
+    (set_keyword) (lhs (identifier)) (rhs (bareword)))
   (variable_assignment 
+    (set_keyword)
     (lhs
       (identifier)
       (indices (number)))
     (rhs (bareword)))
   (temporary_assignment
-    (lhs (identifier)) (rhs (bareword)))
-  (variable_deletion (identifier)))
+    (tmp_keyword) (lhs (identifier)) (rhs (bareword)))
+  (variable_deletion (del_keyword) (identifier)))

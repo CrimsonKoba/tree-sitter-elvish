@@ -207,8 +207,13 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "use"
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": "use"
+          },
+          "named": true,
+          "value": "use_keyword"
         },
         {
           "type": "SYMBOL",
@@ -536,8 +541,13 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "var"
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": "var"
+          },
+          "named": true,
+          "value": "var_keyword"
         },
         {
           "type": "SYMBOL",
@@ -549,8 +559,13 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "set"
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": "set"
+          },
+          "named": true,
+          "value": "set_keyword"
         },
         {
           "type": "SYMBOL",
@@ -562,8 +577,13 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "tmp"
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": "tmp"
+          },
+          "named": true,
+          "value": "tmp_keyword"
         },
         {
           "type": "SYMBOL",
@@ -575,8 +595,13 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "del"
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": "del"
+          },
+          "named": true,
+          "value": "del_keyword"
         },
         {
           "type": "REPEAT1",
@@ -685,8 +710,13 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "fn"
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": "fn"
+          },
+          "named": true,
+          "value": "fn_keyword"
         },
         {
           "type": "SYMBOL",
@@ -702,8 +732,13 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "if"
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": "if"
+          },
+          "named": true,
+          "value": "if_keyword"
         },
         {
           "type": "FIELD",
@@ -755,8 +790,13 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "elif"
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": "elif"
+          },
+          "named": true,
+          "value": "elif_keyword"
         },
         {
           "type": "FIELD",
@@ -789,8 +829,13 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "else"
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": "else"
+          },
+          "named": true,
+          "value": "else_keyword"
         },
         {
           "type": "STRING",
@@ -815,8 +860,13 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "while"
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": "while"
+          },
+          "named": true,
+          "value": "while_keyword"
         },
         {
           "type": "FIELD",
@@ -861,8 +911,13 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "for"
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": "for"
+          },
+          "named": true,
+          "value": "for_keyword"
         },
         {
           "type": "FIELD",
@@ -915,8 +970,13 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "try"
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": "try"
+          },
+          "named": true,
+          "value": "try_keyword"
         },
         {
           "type": "STRING",
@@ -977,8 +1037,13 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "catch"
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": "catch"
+          },
+          "named": true,
+          "value": "catch_keyword"
         },
         {
           "type": "FIELD",
@@ -1011,8 +1076,13 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "finally"
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": "finally"
+          },
+          "named": true,
+          "value": "finally_keyword"
         },
         {
           "type": "STRING",

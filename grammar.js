@@ -78,7 +78,7 @@ module.exports = grammar({
     //
 
     import: $ => seq(
-      "use",
+      alias("use", $.use_keyword),
       $._string_like,
       optional($._string_like)
     ),
@@ -120,13 +120,13 @@ module.exports = grammar({
       )
     },
 
-    variable_declaration: $ => seq("var", $._assignment),
+    variable_declaration: $ => seq(alias("var", $.var_keyword), $._assignment),
 
-    variable_assignment: $ => seq("set", $._assignment),
+    variable_assignment: $ => seq(alias("set", $.set_keyword), $._assignment),
 
-    temporary_assignment: $ => seq("tmp", $._assignment),
+    temporary_assignment: $ => seq(alias("tmp", $.tmp_keyword), $._assignment),
 
-    variable_deletion: $ => seq("del", repeat1($.identifier)),
+    variable_deletion: $ => seq(alias("del", $.del_keyword), repeat1($.identifier)),
 
     _assignment: $ => seq(
       alias(repeat1(seq(
@@ -146,32 +146,30 @@ module.exports = grammar({
       ))
     ),
 
-    function_definition: $ => seq(
-      "fn", $.identifier, $.lambda
-    ),
+    function_definition: $ => seq(alias("fn", $.fn_keyword), $.identifier, $.lambda),
 
     if: $ => seq(
-      "if", field("condition", $._expression),
+      alias("if", $.if_keyword), field("condition", $._expression),
       "{", alias($._statements, $.chunk), "}",
       repeat($.elif),
       optional($.else),
     ),
 
     elif: $ => seq(
-      "elif", field("condition", $._expression),
+      alias("elif", $.elif_keyword), field("condition", $._expression),
       "{", alias($._statements, $.chunk), "}"
     ),
 
-    else: $ => seq("else", "{", alias($._statements, $.chunk), "}"),
+    else: $ => seq(alias("else", $.else_keyword), "{", alias($._statements, $.chunk), "}"),
 
     while: $ => seq(
-      "while", field("condition", $._expression),
+      alias("while", $.while_keyword), field("condition", $._expression),
       "{", alias($._statements, $.chunk), "}",
       optional($.else),
     ),
 
     for: $ => seq(
-      "for",
+      alias("for", $.for_keyword),
       field("var", $.identifier),
       field("container", $._expression),
       "{", alias($._statements, $.chunk), "}",
@@ -179,18 +177,18 @@ module.exports = grammar({
     ),
 
     try: $ => seq(
-      "try", "{", alias($._statements, $.chunk), "}",
+      alias("try", $.try_keyword), "{", alias($._statements, $.chunk), "}",
       optional($.catch),
       optional($.else),
       optional($.finally),
     ),
 
     catch: $ => seq(
-      "catch", field("exception", $.identifier),
+      alias("catch", $.catch_keyword), field("exception", $.identifier),
       "{", alias($._statements, $.chunk), "}"
     ),
 
-    finally: $ => seq("finally", "{", alias($._statements, $.chunk), "}"),
+    finally: $ => seq(alias("finally", $.finally_keyword), "{", alias($._statements, $.chunk), "}"),
 
 
     // ===========
