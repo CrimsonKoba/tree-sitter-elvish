@@ -6,7 +6,9 @@ module.exports = grammar({
 
   extras: $ => [
     /\s/,
-    $.comment
+    $.comment,
+    // Line continuation: ^ followed by \n or \r\n (spec §3.1)
+    token(seq("^", /\r?\n/)),
   ],
 
   word: $ => $.identifier,
@@ -44,7 +46,12 @@ module.exports = grammar({
       $.variable_declaration,
       $.variable_assignment,
       $.temporary_assignment,
+      $.with_command,
       $.variable_deletion,
+      $.and_command,
+      $.or_command,
+      $.coalesce_command,
+      $.pragma,
       $.lambda,
       $.pipeline,
     ),
@@ -73,12 +80,56 @@ module.exports = grammar({
 
 
     // ==========
+    // Keyword aliases (named nodes for editor integration)
+    // ==========
+    // Control flow
+    if_keyword:      $ => alias("if", $.if_keyword),
+    elif_keyword:    $ => alias("elif", $.elif_keyword),
+    else_keyword:    $ => alias("else", $.else_keyword),
+    while_keyword:   $ => alias("while", $.while_keyword),
+    for_keyword:     $ => alias("for", $.for_keyword),
+    try_keyword:     $ => alias("try", $.try_keyword),
+    catch_keyword:   $ => alias("catch", $.catch_keyword),
+    finally_keyword: $ => alias("finally", $.finally_keyword),
+    // Declarations
+    fn_keyword:      $ => alias("fn", $.fn_keyword),
+    var_keyword:     $ => alias("var", $.var_keyword),
+    set_keyword:     $ => alias("set", $.set_keyword),
+    tmp_keyword:     $ => alias("tmp", $.tmp_keyword),
+    del_keyword:     $ => alias("del", $.del_keyword),
+    // Other special commands
+    use_keyword:     $ => alias("use", $.use_keyword),
+    with_keyword:    $ => alias("with", $.with_keyword),
+    and_keyword:     $ => alias("and", $.and_keyword),
+    or_keyword:      $ => alias("or", $.or_keyword),
+    coalesce_keyword:$ => alias("coalesce", $.coalesce_keyword),
+    pragma_keyword:  $ => alias("pragma", $.pragma_keyword),
+    // Operators (optional: enables tree-sitter highlighting without regex fallback)
+    plus_op:         $ => alias("+", $.plus_op),
+    minus_op:        $ => alias("-", $.minus_op),
+    mul_op:          $ => alias("*", $.mul_op),
+    div_op:          $ => alias("/", $.div_op),
+    mod_op:          $ => alias("%", $.mod_op),
+    lt_op:           $ => alias("<", $.lt_op),
+    lte_op:          $ => alias("<=", $.lte_op),
+    eq_op:           $ => alias("==", $.eq_op),
+    neq_op:          $ => alias("!=", $.neq_op),
+    gt_op:           $ => alias(">", $.gt_op),
+    gte_op:          $ => alias(">=", $.gte_op),
+    lt_s_op:         $ => alias("<s", $.lt_s_op),
+    lte_s_op:        $ => alias("<=s", $.lte_s_op),
+    eq_s_op:         $ => alias("==s", $.eq_s_op),
+    neq_s_op:        $ => alias("!=s", $.neq_s_op),
+    gt_s_op:         $ => alias(">s", $.gt_s_op),
+    gte_s_op:        $ => alias(">=s", $.gte_s_op),
+
+
+    // ==========
     // Statements
     // ==========
-    //
 
     import: $ => seq(
-      alias("use", $.use_keyword),
+      $.use_keyword,
       $._string_like,
       optional($._string_like)
     ),
@@ -88,8 +139,10 @@ module.exports = grammar({
         $.identifier,
         $.variable,
         $.output_capture,
-        "+", "-", "*", "/", "%", "<", "<=","==", "!=",
-        ">", ">=", "<s", "<=s", "==s", "!=s", ">s", ">=s"
+        // Operators as named nodes (for tree-sitter highlighting)
+        $.plus_op, $.minus_op, $.mul_op, $.div_op, $.mod_op,
+        $.lt_op, $.lte_op, $.eq_op, $.neq_op, $.gt_op, $.gte_op,
+        $.lt_s_op, $.lte_s_op, $.eq_s_op, $.neq_s_op, $.gt_s_op, $.gte_s_op
       )),
       repeat(field("argument", choice($._expression, $.option))),
       optional($.redirection),
@@ -120,18 +173,31 @@ module.exports = grammar({
       )
     },
 
-    variable_declaration: $ => seq(alias("var", $.var_keyword), $._assignment),
+    variable_declaration: $ => seq($.var_keyword, $._assignment),
 
-    variable_assignment: $ => seq(alias("set", $.set_keyword), $._assignment),
+    variable_assignment: $ => seq($.set_keyword, $._assignment),
 
-    temporary_assignment: $ => seq(alias("tmp", $.tmp_keyword), $._assignment),
+    temporary_assignment: $ => seq($.tmp_keyword, $._assignment),
 
-    variable_deletion: $ => seq(alias("del", $.del_keyword), repeat1($.identifier)),
+    // del supports plain names, quoted names, and element access (spec §8.5)
+    // e.g.  del x      del 'a/b'      del m[k]      del l[0][k2]
+    variable_deletion: $ => seq(
+      $.del_keyword,
+      repeat1(seq(
+        choice($.identifier, $.string),
+        repeat(seq(
+          token.immediate("["),
+          alias(repeat1($._expression), $.indices),
+          "]"
+        ))
+      ))
+    ),
 
+    // lhs allows quoted variable names, e.g.  set 'a/b' = foo  (spec §8.2)
     _assignment: $ => seq(
       alias(repeat1(seq(
           optional("@"),
-          $.identifier,
+          choice($.identifier, $.string),
           repeat(seq(
             token.immediate("["),
             alias(repeat1($._expression), $.indices),
@@ -146,30 +212,30 @@ module.exports = grammar({
       ))
     ),
 
-    function_definition: $ => seq(alias("fn", $.fn_keyword), $.identifier, $.lambda),
+    function_definition: $ => seq($.fn_keyword, $.identifier, $.lambda),
 
     if: $ => seq(
-      alias("if", $.if_keyword), field("condition", $._expression),
+      $.if_keyword, field("condition", $._expression),
       "{", alias($._statements, $.chunk), "}",
       repeat($.elif),
       optional($.else),
     ),
 
     elif: $ => seq(
-      alias("elif", $.elif_keyword), field("condition", $._expression),
+      $.elif_keyword, field("condition", $._expression),
       "{", alias($._statements, $.chunk), "}"
     ),
 
-    else: $ => seq(alias("else", $.else_keyword), "{", alias($._statements, $.chunk), "}"),
+    else: $ => seq($.else_keyword, "{", alias($._statements, $.chunk), "}"),
 
     while: $ => seq(
-      alias("while", $.while_keyword), field("condition", $._expression),
+      $.while_keyword, field("condition", $._expression),
       "{", alias($._statements, $.chunk), "}",
       optional($.else),
     ),
 
     for: $ => seq(
-      alias("for", $.for_keyword),
+      $.for_keyword,
       field("var", $.identifier),
       field("container", $._expression),
       "{", alias($._statements, $.chunk), "}",
@@ -177,18 +243,75 @@ module.exports = grammar({
     ),
 
     try: $ => seq(
-      alias("try", $.try_keyword), "{", alias($._statements, $.chunk), "}",
+      $.try_keyword, "{", alias($._statements, $.chunk), "}",
       optional($.catch),
       optional($.else),
       optional($.finally),
     ),
 
     catch: $ => seq(
-      alias("catch", $.catch_keyword), field("exception", $.identifier),
+      $.catch_keyword, field("exception", $.identifier),
       "{", alias($._statements, $.chunk), "}"
     ),
 
-    finally: $ => seq(alias("finally", $.finally_keyword), "{", alias($._statements, $.chunk), "}"),
+    finally: $ => seq($.finally_keyword, "{", alias($._statements, $.chunk), "}"),
+
+    // with: temporary assignment that restores values after running a lambda (spec §8.4)
+    // Inline form:    with lhs = rhs { body }
+    // Bracketed form: with [lhs = rhs] [lhs = rhs] ... { body }
+    with_command: $ => seq(
+      $.with_keyword,
+      choice(
+        // Inline: with x = value { body }
+        seq(
+          alias(repeat1(seq(
+              optional("@"),
+              choice($.identifier, $.string),
+              repeat(seq(
+                token.immediate("["),
+                alias(repeat1($._expression), $.indices),
+                "]"
+              ))
+            )),
+            $.lhs
+          ),
+          "=",
+          alias(repeat1($._expression), $.rhs),
+        ),
+        // Bracketed: with [x = value] [y = value] ... { body }
+        repeat1(seq(
+          "[",
+          alias(repeat1(seq(
+              optional("@"),
+              choice($.identifier, $.string),
+              repeat(seq(
+                token.immediate("["),
+                alias(repeat1($._expression), $.indices),
+                "]"
+              ))
+            )),
+            $.lhs
+          ),
+          "=",
+          alias(repeat1($._expression), $.rhs),
+          "]",
+        )),
+      ),
+      $.lambda,
+    ),
+
+    // Logical short-circuit special commands (spec §8.6)
+    and_command:      $ => seq($.and_keyword,      repeat($._expression)),
+    or_command:       $ => seq($.or_keyword,       repeat($._expression)),
+    coalesce_command: $ => seq($.coalesce_keyword, repeat($._expression)),
+
+    // Compiler pragma (spec §8.12): pragma <name> <value>
+    // e.g.  pragma unknown-command external
+    pragma: $ => seq(
+      $.pragma_keyword,
+      field("name", $.bareword),
+      field("value", $.bareword),
+    ),
 
 
     // ===========
@@ -214,8 +337,11 @@ module.exports = grammar({
       "|"
     ),
 
+    // Options: &key or &key=value (spec §7.1: bare &key is equivalent to &key=$true)
     option: $ => seq(
-      "&", $.identifier, "=", $._expression
+      "&",
+      field("key", $.identifier),
+      optional(seq("=", field("value", $._expression)))
     ),
 
     indexing: $ => seq(
@@ -244,8 +370,11 @@ module.exports = grammar({
       "?(", alias($._statements, $.chunk), ")"
     ),
 
-    variable: $ => choice(
-      seq("$", optional("@"), $.identifier),
+    // Variable use: $name  $@name  $"quoted"  $'quoted'  (spec §6.2)
+    variable: $ => seq(
+      "$",
+      optional("@"),
+      choice($.identifier, $.string)
     ),
 
     number: $ => {
@@ -294,13 +423,27 @@ module.exports = grammar({
 
     list: $ => seq("[", repeat($._expression), "]"),
 
-    map: $ => seq("[", repeat1($.pair), "]"),
+    // Map literals (spec §4.4):
+    //   [&]             empty map
+    //   [&key=value]    standard pair
+    //   [&key]          equivalent to [&key=$true]
+    //   [&key=]         equivalent to [&key='']
+    map: $ => seq(
+      "[",
+      choice(
+        "&",             // [&] — bare ampersand signals empty map
+        repeat1($.pair), // one or more key-value pairs
+      ),
+      "]"
+    ),
 
     pair: $ => seq(
       "&",
-      field("key", $.identifier),
-      "=",
-      field("value", $._expression)
+      field("key", choice($.identifier, $.string)),
+      optional(seq(
+        "=",
+        optional(field("value", $._expression))
+      ))
     ),
   }
 });

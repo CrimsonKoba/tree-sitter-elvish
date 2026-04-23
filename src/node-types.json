@@ -1,5 +1,83 @@
 [
   {
+    "type": "and_command",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "and_keyword",
+          "named": true
+        },
+        {
+          "type": "bareword",
+          "named": true
+        },
+        {
+          "type": "braced_list",
+          "named": true
+        },
+        {
+          "type": "exception_capture",
+          "named": true
+        },
+        {
+          "type": "indexing",
+          "named": true
+        },
+        {
+          "type": "lambda",
+          "named": true
+        },
+        {
+          "type": "list",
+          "named": true
+        },
+        {
+          "type": "map",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "output_capture",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        },
+        {
+          "type": "variable",
+          "named": true
+        },
+        {
+          "type": "wildcard",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "and_keyword",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "and_keyword",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "braced_list",
     "named": true,
     "fields": {},
@@ -89,6 +167,21 @@
     }
   },
   {
+    "type": "catch_keyword",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "catch_keyword",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "chunk",
     "named": true,
     "fields": {},
@@ -96,6 +189,14 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "and_command",
+          "named": true
+        },
+        {
+          "type": "coalesce_command",
+          "named": true
+        },
         {
           "type": "command",
           "named": true
@@ -121,7 +222,15 @@
           "named": true
         },
         {
+          "type": "or_command",
+          "named": true
+        },
+        {
           "type": "pipeline",
+          "named": true
+        },
+        {
+          "type": "pragma",
           "named": true
         },
         {
@@ -146,6 +255,88 @@
         },
         {
           "type": "while",
+          "named": true
+        },
+        {
+          "type": "with_command",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "coalesce_command",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "bareword",
+          "named": true
+        },
+        {
+          "type": "braced_list",
+          "named": true
+        },
+        {
+          "type": "coalesce_keyword",
+          "named": true
+        },
+        {
+          "type": "exception_capture",
+          "named": true
+        },
+        {
+          "type": "indexing",
+          "named": true
+        },
+        {
+          "type": "lambda",
+          "named": true
+        },
+        {
+          "type": "list",
+          "named": true
+        },
+        {
+          "type": "map",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "output_capture",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        },
+        {
+          "type": "variable",
+          "named": true
+        },
+        {
+          "type": "wildcard",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "coalesce_keyword",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "coalesce_keyword",
           "named": true
         }
       ]
@@ -218,79 +409,79 @@
         "required": true,
         "types": [
           {
-            "type": "!=",
-            "named": false
+            "type": "div_op",
+            "named": true
           },
           {
-            "type": "!=s",
-            "named": false
+            "type": "eq_op",
+            "named": true
           },
           {
-            "type": "%",
-            "named": false
+            "type": "eq_s_op",
+            "named": true
           },
           {
-            "type": "*",
-            "named": false
+            "type": "gt_op",
+            "named": true
           },
           {
-            "type": "+",
-            "named": false
+            "type": "gt_s_op",
+            "named": true
           },
           {
-            "type": "-",
-            "named": false
+            "type": "gte_op",
+            "named": true
           },
           {
-            "type": "/",
-            "named": false
-          },
-          {
-            "type": "<",
-            "named": false
-          },
-          {
-            "type": "<=",
-            "named": false
-          },
-          {
-            "type": "<=s",
-            "named": false
-          },
-          {
-            "type": "<s",
-            "named": false
-          },
-          {
-            "type": "==",
-            "named": false
-          },
-          {
-            "type": "==s",
-            "named": false
-          },
-          {
-            "type": ">",
-            "named": false
-          },
-          {
-            "type": ">=",
-            "named": false
-          },
-          {
-            "type": ">=s",
-            "named": false
-          },
-          {
-            "type": ">s",
-            "named": false
+            "type": "gte_s_op",
+            "named": true
           },
           {
             "type": "identifier",
             "named": true
           },
           {
+            "type": "lt_op",
+            "named": true
+          },
+          {
+            "type": "lt_s_op",
+            "named": true
+          },
+          {
+            "type": "lte_op",
+            "named": true
+          },
+          {
+            "type": "lte_s_op",
+            "named": true
+          },
+          {
+            "type": "minus_op",
+            "named": true
+          },
+          {
+            "type": "mod_op",
+            "named": true
+          },
+          {
+            "type": "mul_op",
+            "named": true
+          },
+          {
+            "type": "neq_op",
+            "named": true
+          },
+          {
+            "type": "neq_s_op",
+            "named": true
+          },
+          {
             "type": "output_capture",
+            "named": true
+          },
+          {
+            "type": "plus_op",
             "named": true
           },
           {
@@ -306,6 +497,36 @@
       "types": [
         {
           "type": "redirection",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "del_keyword",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "del_keyword",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "div_op",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "div_op",
           "named": true
         }
       ]
@@ -386,6 +607,21 @@
     }
   },
   {
+    "type": "elif_keyword",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "elif_keyword",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "else",
     "named": true,
     "fields": {},
@@ -399,6 +635,51 @@
         },
         {
           "type": "else_keyword",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "else_keyword",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "else_keyword",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "eq_op",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "eq_op",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "eq_s_op",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "eq_s_op",
           "named": true
         }
       ]
@@ -433,6 +714,36 @@
         },
         {
           "type": "finally_keyword",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "finally_keyword",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "finally_keyword",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "fn_keyword",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "fn_keyword",
           "named": true
         }
       ]
@@ -527,6 +838,21 @@
     }
   },
   {
+    "type": "for_keyword",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "for_keyword",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "function_definition",
     "named": true,
     "fields": {},
@@ -544,6 +870,66 @@
         },
         {
           "type": "lambda",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "gt_op",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "gt_op",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "gt_s_op",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "gt_s_op",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "gte_op",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "gte_op",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "gte_s_op",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "gte_s_op",
           "named": true
         }
       ]
@@ -624,6 +1010,21 @@
           "type": "else",
           "named": true
         },
+        {
+          "type": "if_keyword",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "if_keyword",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
         {
           "type": "if_keyword",
           "named": true
@@ -778,6 +1179,10 @@
         {
           "type": "indices",
           "named": true
+        },
+        {
+          "type": "string",
+          "named": true
         }
       ]
     }
@@ -842,12 +1247,72 @@
     }
   },
   {
+    "type": "lt_op",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "lt_op",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "lt_s_op",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "lt_s_op",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "lte_op",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "lte_op",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "lte_s_op",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "lte_s_op",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "map",
     "named": true,
     "fields": {},
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "pair",
@@ -857,7 +1322,152 @@
     }
   },
   {
+    "type": "minus_op",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "minus_op",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "mod_op",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "mod_op",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "mul_op",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "mul_op",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "neq_op",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "neq_op",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "neq_s_op",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "neq_s_op",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "option",
+    "named": true,
+    "fields": {
+      "key": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "value": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "bareword",
+            "named": true
+          },
+          {
+            "type": "braced_list",
+            "named": true
+          },
+          {
+            "type": "exception_capture",
+            "named": true
+          },
+          {
+            "type": "indexing",
+            "named": true
+          },
+          {
+            "type": "lambda",
+            "named": true
+          },
+          {
+            "type": "list",
+            "named": true
+          },
+          {
+            "type": "map",
+            "named": true
+          },
+          {
+            "type": "number",
+            "named": true
+          },
+          {
+            "type": "output_capture",
+            "named": true
+          },
+          {
+            "type": "string",
+            "named": true
+          },
+          {
+            "type": "variable",
+            "named": true
+          },
+          {
+            "type": "wildcard",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "or_command",
     "named": true,
     "fields": {},
     "children": {
@@ -874,10 +1484,6 @@
         },
         {
           "type": "exception_capture",
-          "named": true
-        },
-        {
-          "type": "identifier",
           "named": true
         },
         {
@@ -901,6 +1507,10 @@
           "named": true
         },
         {
+          "type": "or_keyword",
+          "named": true
+        },
+        {
           "type": "output_capture",
           "named": true
         },
@@ -914,6 +1524,21 @@
         },
         {
           "type": "wildcard",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "or_keyword",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "or_keyword",
           "named": true
         }
       ]
@@ -945,12 +1570,16 @@
           {
             "type": "identifier",
             "named": true
+          },
+          {
+            "type": "string",
+            "named": true
           }
         ]
       },
       "value": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "bareword",
@@ -1044,6 +1673,72 @@
     }
   },
   {
+    "type": "plus_op",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "plus_op",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "pragma",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "bareword",
+            "named": true
+          }
+        ]
+      },
+      "value": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "bareword",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "pragma_keyword",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "pragma_keyword",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "pragma_keyword",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "redirection",
     "named": true,
     "fields": {},
@@ -1122,6 +1817,21 @@
     }
   },
   {
+    "type": "set_keyword",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "set_keyword",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "source_file",
     "named": true,
     "root": true,
@@ -1130,6 +1840,14 @@
       "multiple": true,
       "required": false,
       "types": [
+        {
+          "type": "and_command",
+          "named": true
+        },
+        {
+          "type": "coalesce_command",
+          "named": true
+        },
         {
           "type": "command",
           "named": true
@@ -1155,7 +1873,15 @@
           "named": true
         },
         {
+          "type": "or_command",
+          "named": true
+        },
+        {
           "type": "pipeline",
+          "named": true
+        },
+        {
+          "type": "pragma",
           "named": true
         },
         {
@@ -1181,6 +1907,10 @@
         {
           "type": "while",
           "named": true
+        },
+        {
+          "type": "with_command",
+          "named": true
         }
       ]
     }
@@ -1201,6 +1931,21 @@
           "type": "rhs",
           "named": true
         },
+        {
+          "type": "tmp_keyword",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "tmp_keyword",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
         {
           "type": "tmp_keyword",
           "named": true
@@ -1240,6 +1985,51 @@
     }
   },
   {
+    "type": "try_keyword",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "try_keyword",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "use_keyword",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "use_keyword",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "var_keyword",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "var_keyword",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "variable",
     "named": true,
     "fields": {},
@@ -1249,6 +2039,10 @@
       "types": [
         {
           "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "string",
           "named": true
         }
       ]
@@ -1314,6 +2108,14 @@
         },
         {
           "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "indices",
+          "named": true
+        },
+        {
+          "type": "string",
           "named": true
         }
       ]
@@ -1398,6 +2200,21 @@
     }
   },
   {
+    "type": "while_keyword",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "while_keyword",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "wildcard",
     "named": true,
     "fields": {},
@@ -1413,23 +2230,53 @@
     }
   },
   {
+    "type": "with_command",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "lambda",
+          "named": true
+        },
+        {
+          "type": "lhs",
+          "named": true
+        },
+        {
+          "type": "rhs",
+          "named": true
+        },
+        {
+          "type": "with_keyword",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "with_keyword",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "with_keyword",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "\n",
     "named": false
   },
   {
-    "type": "!=",
-    "named": false
-  },
-  {
-    "type": "!=s",
-    "named": false
-  },
-  {
     "type": "$",
-    "named": false
-  },
-  {
-    "type": "%",
     "named": false
   },
   {
@@ -1453,18 +2300,6 @@
     "named": false
   },
   {
-    "type": "+",
-    "named": false
-  },
-  {
-    "type": "-",
-    "named": false
-  },
-  {
-    "type": "/",
-    "named": false
-  },
-  {
     "type": ";",
     "named": false
   },
@@ -1473,19 +2308,7 @@
     "named": false
   },
   {
-    "type": "<=",
-    "named": false
-  },
-  {
-    "type": "<=s",
-    "named": false
-  },
-  {
     "type": "<>",
-    "named": false
-  },
-  {
-    "type": "<s",
     "named": false
   },
   {
@@ -1493,31 +2316,11 @@
     "named": false
   },
   {
-    "type": "==",
-    "named": false
-  },
-  {
-    "type": "==s",
-    "named": false
-  },
-  {
     "type": ">",
     "named": false
   },
   {
-    "type": ">=",
-    "named": false
-  },
-  {
-    "type": ">=s",
-    "named": false
-  },
-  {
     "type": ">>",
-    "named": false
-  },
-  {
-    "type": ">s",
     "named": false
   },
   {
@@ -1545,48 +2348,16 @@
     "named": true
   },
   {
-    "type": "catch_keyword",
-    "named": true
-  },
-  {
     "type": "comment",
     "named": true,
     "extra": true
-  },
-  {
-    "type": "del_keyword",
-    "named": true
-  },
-  {
-    "type": "elif_keyword",
-    "named": true
-  },
-  {
-    "type": "else_keyword",
-    "named": true
   },
   {
     "type": "file",
     "named": true
   },
   {
-    "type": "finally_keyword",
-    "named": true
-  },
-  {
-    "type": "fn_keyword",
-    "named": true
-  },
-  {
-    "type": "for_keyword",
-    "named": true
-  },
-  {
     "type": "identifier",
-    "named": true
-  },
-  {
-    "type": "if_keyword",
     "named": true
   },
   {
@@ -1598,31 +2369,7 @@
     "named": true
   },
   {
-    "type": "set_keyword",
-    "named": true
-  },
-  {
     "type": "string",
-    "named": true
-  },
-  {
-    "type": "tmp_keyword",
-    "named": true
-  },
-  {
-    "type": "try_keyword",
-    "named": true
-  },
-  {
-    "type": "use_keyword",
-    "named": true
-  },
-  {
-    "type": "var_keyword",
-    "named": true
-  },
-  {
-    "type": "while_keyword",
     "named": true
   },
   {
