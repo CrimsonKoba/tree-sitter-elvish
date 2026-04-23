@@ -1,0 +1,19 @@
+{
+  "grammars": [{
+    "name": "elvish",
+    "camelcase": "Elvish",
+    "scope": "source.elvish",
+    "path": ".",
+    "file-types": ["elv"],
+    "highlights": "queries/highlights.scm"
+  }],
+  "metadata": {
+    "version": "0.2.0",
+    "description": "Elvish grammar for tree-sitter"
+  },
+  "bindings": {
+    "c": true,
+    "node": true,
+    "rust": true
+  }
+}
